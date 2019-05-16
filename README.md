@@ -1,15 +1,21 @@
 # onlinePCA-experiments
 
-# Data preparation
-- Cortex : XXX
-- Pancreas : XXX
-- Brain : XXX
+# Data preparation (for generating ./Data/*/Data.csv)
+- Cortex : ./Data/Cortex/README
+- Pancreas : ./Data/Pancreas/README
+- Brain : https://gist.github.com/kokitsuyuzaki/5b6cebcaf37100c8794bdb89c7135fd5
 
 # Requirement
-- R : vXX.XX.XX
-  - R packages : XXX
-Python : vXX.XX.XX
-  - Python packages : XXX
-Julia : vXX.XX.XX
-  - Julia packages : XXX
+- Open Grid Scheduler/Grid Engine : XXX
+- R : v3.5.0
+- Python : v3.6.4
+- Julia : v1.0.1
 
+# How to perform all the PCA scripts
+```{bash}
+cd Analysis
+rake install # Package installation
+rake preprocess # Preprocessing the data files
+rake benchmark # Benchmarking all the PCA implementations
+rake tenxpca # PCA implementation for 10X-HDF files
+```
