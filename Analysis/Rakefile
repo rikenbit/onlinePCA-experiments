@@ -8,8 +8,6 @@ task :install do
 	sh "pip install scikit-learn"
 	sh "pip install dask"
 	sh "pip install dask_ml"
-	sh "pip install warnings"
-	sh "pip install array"
 	# Julia
 	sh "julia src/Install_Julia_Packages.jl" # まだ未完成
 end
@@ -62,6 +60,5 @@ end
 
 desc "PCA implementation for 10X-HDF files"
 task :tenxpca do
-	sh "src/Bench_TENXSUMR.sh"
 	sh "src/Bench_TENXPCA.sh"
 end

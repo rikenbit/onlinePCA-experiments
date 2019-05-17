@@ -6,7 +6,8 @@
 - **Brain** : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
 
 ## Requirement
-- **Open Grid Scheduler/Grid Engine** : 2011.11
+- **GNU Time** : v1.7
+- **Open Grid Scheduler/Grid Engine** : v2011.11
 - **R** : v3.5.0
 - **Python** : v3.6.4
 - **Julia** : v1.0.1

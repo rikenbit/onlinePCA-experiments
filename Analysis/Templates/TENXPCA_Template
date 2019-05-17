@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#$ -l nc=6
+#$ -p -50
+#$ -q large.q
+export OPENBLAS_NUM_THREADS=6
+
+# AAAAA : Number of genes
+# BBBBB : Output directory
+# CCCCC : Log files
+/usr/bin/time -v julia src/TENXPCA.jl AAAAA BBBBB >& CCCCC
+
+touch BBBBB/*
+touch CCCCC
