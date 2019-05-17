@@ -1,3 +1,5 @@
+#!/bin/bash
+
 julia="/home/koki/Software/julia-1.0.1/bin/julia"
 LATEST=(`ls -t /home/koki/.julia/packages/OnlinePCA/ | head -1`)
 sumr="/home/koki/.julia/packages/OnlinePCA/"$LATEST"/bin/sumr"

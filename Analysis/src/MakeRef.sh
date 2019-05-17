@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Cortex"
 /usr/bin/time -v julia src/makeref.jl \
  ../Data/Cortex/Data.csv \
@@ -11,4 +13,4 @@ echo "Pancreas"
 echo "Brain"
 /usr/bin/time -v julia src/makeref.jl \
  ../Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv \
- ../Data/Brain/ref1M_neurons_filtered_gene_bc_matrices_h5.csv >& log/makeref_Brain_Chromium.out
+ ../Data/Brain/ref1M_neurons_filtered_gene_bc_matrices_h5.csv >& log/makeref_Brain.out

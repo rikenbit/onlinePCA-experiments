@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#$ -l nc=4
+#$ -p -50
+#$ -q node07-10.q
+
+/usr/bin/time -v /home/koki/Software/R-3.5.0/bin/R --vanilla --slave --args XXXXX YYYYY/refLoading.csv SSSSS < src/RefSVD.R >& ZZZZZ
+
+touch YYYYY/refLoading.csv
+touch ZZZZZ
