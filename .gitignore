@@ -1,4 +1,7 @@
-Data/*/*
+Data/*/*.csv
+Data/*/*.zst
+Data/*/*/Eigen_vectors.csv
+Data/*/*/Eigen_values.csv
 
 docs/build/
 docs/site/

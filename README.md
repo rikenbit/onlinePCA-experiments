@@ -3,7 +3,7 @@
 ## Data preparation
 - Cortex : Data/Cortex/README (for generating Data/Cortex/Data.csv)
 - Pancreas : Data/Pancreas/README (for generating Data/Pancreas/Data.csv)
-- Brain : https://gist.github.com/kokitsuyuzaki/5b6cebcaf37100c8794bdb89c7135fd5 (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
+- Brain : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
 
 ## Requirement
 - Open Grid Scheduler/Grid Engine : XXX
