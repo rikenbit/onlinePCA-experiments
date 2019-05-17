@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#$ -l nc=4
+#$ -p -50
+#$ -q node.q
+
+/usr/bin/time -v python src/Sklearn_randomized_svd.py XXXXX SSSSS YYYYY/Eigen_vectors.csv YYYYY/Eigen_values.csv >& ZZZZZ
+
+touch YYYYY/Eigen_vectors.csv
+touch YYYYY/Eigen_values.csv
+touch ZZZZZ

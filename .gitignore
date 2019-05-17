@@ -2,6 +2,8 @@ Data/*/*.csv
 Data/*/*.zst
 Data/*/*/Eigen_vectors.csv
 Data/*/*/Eigen_values.csv
+Data/*/*/log/*.csv
+Data/*/*/*.csv
 
 docs/build/
 docs/site/

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#$ -l nc=6
+#$ -p -50
+#$ -q node.q
+export OPENBLAS_NUM_THREADS=6
+
+LATEST=(`ls -t ~/.julia/packages/OnlinePCA/ | head -1`)
+sgd="~/.julia/packages/OnlinePCA/"$LATEST"/bin/sgd"
+
+/usr/bin/time -v julia $sgd \
+--scale log \
+--input AAAAA \
+--outdir BBBBB \
+--numepoch CCCCC \
+--numbatch 1000 \
+--rowmeanlist DDDDD \
+--dim EEEEE \
+--stepsize FFFFF \
+--logdir BBBBB/log >& GGGGG
+
+touch BBBBB/Eigen_vectors.csv
+touch BBBBB/Eigen_values.csv
+touch GGGGG

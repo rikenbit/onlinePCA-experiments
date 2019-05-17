@@ -10,6 +10,7 @@
 - **R** : v3.5.0
 - **Python** : v3.6.4
 - **Julia** : v1.0.1
+- **Rake (Ruby)** : v11.2.2
 
 ## How to perform all the PCA scripts
 ```{bash}

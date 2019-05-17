@@ -2,9 +2,9 @@
 
 #$ -l nc=4
 #$ -p -50
-#$ -q node07-10.q
+#$ -q node.q
 
-/usr/bin/time -v /home/koki/Software/R-3.5.0/bin/R --vanilla --slave --args XXXXX TTTTT UUUUU YYYYY/Eigen_vectors.csv YYYYY/Eigen_values.csv SSSSS < src/oocRPCA.R >& ZZZZZ
+/usr/bin/time -v R --vanilla --slave --args XXXXX TTTTT UUUUU YYYYY/Eigen_vectors.csv YYYYY/Eigen_values.csv SSSSS < src/oocRPCA.R >& ZZZZZ
 
 touch YYYYY/Eigen_vectors.csv
 touch YYYYY/Eigen_values.csv
