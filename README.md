@@ -5,7 +5,7 @@
 - **Pancreas** : Data/Pancreas/README
 - **Brain** : Data/Brain/README
 
-## Requirement
+## Requirements
 - **GNU Time** : v1.7
 - **Open Grid Scheduler/Grid Engine** : v2011.11
 - **R** : v3.5.0
@@ -19,10 +19,10 @@ cd Analysis
 rake install # Package installation
 rake preprocess # Preprocessing the data files
 rake benchmark # Benchmarking all the PCA implementations
-rake tenxpca # PCA implementation for 10X-HDF files
+rake tenxpca # A PCA implementation for 10X-HDF files
 ```
 
 ## Result of the banchmarking
-- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/[Each PCA Implementation]/Eigen_vectors.csv
-- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/[Each PCA Implementation]/Eigen_values.csv
+- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/*[Each PCA]*/Eigen_vectors.csv
+- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/*[Each PCA]*/Eigen_values.csv
 - **Elapsed time and memory usage** : Analysis/log/*
