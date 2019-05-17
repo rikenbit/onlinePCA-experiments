@@ -1,15 +1,15 @@
 # onlinePCA-experiments
 
 ## Data preparation
-- Cortex : Data/Cortex/README (for generating Data/Cortex/Data.csv)
-- Pancreas : Data/Pancreas/README (for generating Data/Pancreas/Data.csv)
-- Brain : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
+- **Cortex** : Data/Cortex/README (for generating Data/Cortex/Data.csv)
+- **Pancreas** : Data/Pancreas/README (for generating Data/Pancreas/Data.csv)
+- **Brain** : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
 
 ## Requirement
-- Open Grid Scheduler/Grid Engine : 2011.11
-- R : v3.5.0
-- Python : v3.6.4
-- Julia : v1.0.1
+- **Open Grid Scheduler/Grid Engine** : 2011.11
+- **R** : v3.5.0
+- **Python** : v3.6.4
+- **Julia** : v1.0.1
 
 ## How to perform all the PCA scripts
 ```{bash}
