@@ -1,9 +1,9 @@
 # onlinePCA-experiments
 
-## Data preparation
-- **Cortex** : Data/Cortex/README (for generating Data/Cortex/Data.csv)
-- **Pancreas** : Data/Pancreas/README (for generating Data/Pancreas/Data.csv)
-- **Brain** : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
+## About data preparation
+- **Cortex** : Data/Cortex/README
+- **Pancreas** : Data/Pancreas/README
+- **Brain** : Data/Brain/README
 
 ## Requirement
 - **GNU Time** : v1.7
@@ -25,4 +25,4 @@ rake tenxpca # PCA implementation for 10X-HDF files
 ## Result of the banchmarking
 - **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/*/Eigen_vectors.csv
 - **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/*/Eigen_values.csv
-- **Elapsed time and memory usage** : log/*
+- **Elapsed time and memory usage** : Analysis/log/*
