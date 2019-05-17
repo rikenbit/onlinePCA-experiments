@@ -19,8 +19,7 @@ task :preprocess do
 	sh "src/MakeRef.sh"
 	sh "src/RefSVD.sh"
 	# Transpose
-	sh "/usr/bin/time -v R CMD BATCH src/Transpose_Real_Cortical_SMART.R >& /data2/koki/ICCIPCA/Analysis/log/transpose_Cortical_SMART.out"
-	sh "/usr/bin/time -v R CMD BATCH src/Transpose_Real_Pancreas_inDrop.R >& /data2/koki/ICCIPCA/Analysis/log/transpose_Pancreas_inDrop.out"
+	sh "src/Transpose.sh"
 end
 
 desc "Benchmarking all the PCA implementations"
