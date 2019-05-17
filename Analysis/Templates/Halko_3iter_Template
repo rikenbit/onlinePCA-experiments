@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#$ -l nc=6
+#$ -p -50
+#$ -q node.q
+export OPENBLAS_NUM_THREADS=6
+
+LATEST=(`ls -t ~/.julia/packages/OnlinePCA/ | head -1`)
+halko="~/.julia/packages/OnlinePCA/"$LATEST"/bin/halko"
+
+/usr/bin/time -v julia $halko \
+--scale log \
+--input AAAAA \
+--outdir BBBBB \
+--rowmeanlist DDDDD \
+--dim EEEEE \
+--niter 3 \
+--logdir BBBBB/log >& GGGGG
+
+touch BBBBB/Eigen_vectors.csv
+touch BBBBB/Eigen_values.csv
+touch GGGGG
