@@ -1,1 +1,129 @@
+######################################################################
+# Step.1 : Register on the Single Cell Portal Beta
+# https://portals.broadinstitute.org/single_cell
+# (note that the Chrome or FireFox is recommended)
+######################################################################
 
+######################################################################
+# Step.2 : Download "clusters.txt" and "expression_matrix.txt" from
+# https://portals.broadinstitute.org/single_cell/study/a-transcriptomic-taxonomy-of-adult-mouse-visual-cortex-visp
+######################################################################
+
+######################################################################
+# Step.3 : Perform the R script below
+######################################################################
+
+library("RColorBrewer")
+library("matrixStats")
+library("destiny")
+library("Rtsne")
+
+label.Cortical <- as.vector(read.delim("clusters.txt", sep="\t",
+	stringsAsFactor=FALSE, header=TRUE, skip=1)[,2])
+names(label.Cortical) <- label.Cortical
+names.Cortical <- label.Cortical
+rgbs <- c(
+	brewer.pal(11, "Spectral"),
+	brewer.pal(8, "Accent"),
+	brewer.pal(9, "Greys")[c(5,9)]
+	)
+sapply(1:length(table(names.Cortical)), function(x){
+	label.Cortical[which(label.Cortical == unique(names.Cortical)[x])] <<-
+	rgbs[x]
+	})
+
+Cortical <- read.delim("expression_matrix.txt", sep="\t",
+	header=TRUE, row.names=1)
+Cortical <- Cortical[which(rowVars(log10(as.matrix(Cortical) + 1)) != 0), ]
+Cortical_high <- Cortical[which(rowMeans(log10(Cortical + 1)) > 2), ]
+
+# PCA
+result.pca.Cortical <- prcomp(log10(Cortical + 1))
+result.pca.Cortical_high <- prcomp(log10(Cortical_high + 1))
+
+# Diffusion Map
+result.destiny.Cortical <- DiffusionMap(
+	as.ExpressionSet(as.data.frame(t(log10(Cortical + 1)))))
+result.destiny.Cortical_high <- DiffusionMap(
+	as.ExpressionSet(as.data.frame(t(log10(Cortical_high + 1)))))
+
+# t-SNE
+result.tSNE.Cortical <- Rtsne(t(log10(Cortical + 1)), dims=2)
+result.tSNE.Cortical_high <- Rtsne(t(log10(Cortical_high + 1)), dims=2)
+
+# Save
+save.image(file="Cortical.Rdata")
+
+# Plot
+png(file = "Cortical_PCA.png", width=1500, height=1500)
+pairs(result.pca.Cortical$rotation[,1:10], pch=16,
+	main="Cortical (PCA)", col=label.Cortical)
+dev.off()
+
+png(file = "Cortical_PCA_high.png", width=1500, height=1500)
+pairs(result.pca.Cortical_high$rotation[,1:10], pch=16,
+	main="Cortical (PCA)", col=label.Cortical)
+dev.off()
+
+png(file = "Cortical_DiffusionMap.png", width=1500, height=1500)
+pairs(result.destiny.Cortical@eigenvectors[,1:10], pch=16,
+	main="Cortical (DiffusionMap)", col=label.Cortical)
+dev.off()
+
+png(file = "Cortical_DiffusionMap_high.png", width=1500, height=1500)
+pairs(result.destiny.Cortical_high@eigenvectors[,1:10], pch=16,
+	main="Cortical (DiffusionMap)", col=label.Cortical)
+dev.off()
+
+png(file = "Cortical_tSNE.png", width=1500, height=1500)
+plot(result.tSNE.Cortical$Y, pch=16, main="Cortical (tSNE)",
+	col=label.Cortical, cex=3)
+dev.off()
+
+png(file = "Cortical_tSNE_high.png", width=1500, height=1500)
+plot(result.tSNE.Cortical_high$Y, pch=16, main="Cortical (tSNE)",
+	col=label.Cortical, cex=3)
+dev.off()
+
+# Output（21614 × 1679）
+write.table(Cortical, "Data.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output（1679 × 21614）
+write.table(t(Cortical), "t_Data.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log-transformation
+out <- log10(Cortical + 1)
+
+# data.frame => matrix
+out <- as.matrix(out)
+
+# Output（21614 × 1679）
+write.table(out, "LogDataZero.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output（1679 × 21614）
+write.table(t(out), "t_LogDataZero.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Remove variance 0 genes
+out <- out[which(rowVars(out) != 0), ]
+
+# Output（21614 × 1679）
+write.table(out, "LogData.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output（1679 × 21614）
+write.table(t(out), "t_LogData.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+
+# Centering
+out <- as.matrix(t(scale(t(out))))
+
+# Output（21614 × 1679）
+write.table(out, "ScaledLogData.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")
+# Output（1679 × 21614）
+write.table(t(out), "t_ScaledLogData.csv", quote=FALSE,
+	row.names=FALSE, col.names=FALSE, sep=",")

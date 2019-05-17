@@ -23,6 +23,6 @@ rake tenxpca # PCA implementation for 10X-HDF files
 ```
 
 ## Result of the banchmarking
-- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/*/Eigen_vectors.csv
-- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/*/Eigen_values.csv
+- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/[Each PCA Implementation]/Eigen_vectors.csv
+- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/[Each PCA Implementation]/Eigen_values.csv
 - **Elapsed time and memory usage** : Analysis/log/*

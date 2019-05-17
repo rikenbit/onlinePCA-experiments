@@ -1,1 +1,196 @@
+######################################################################
+# Step.1 : Download GSE84133_RAW.tar from GEO (GSE84133)
+# https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE84133&format=file
+######################################################################
 
+######################################################################
+# Step.2 : Perform the R script below
+######################################################################
+library("tagcloud")
+library("matrixStats")
+library("Rtsne")
+library("RColorBrewer")
+
+# データ入力
+human1 <- read.csv("GSE84133_RAW/GSM2230757_human1_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+human2 <- read.csv("GSE84133_RAW/GSM2230758_human2_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+human3 <- read.csv("GSE84133_RAW/GSM2230759_human3_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+human4 <- read.csv("GSE84133_RAW/GSM2230760_human4_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+mouse1 <- read.csv("GSE84133_RAW/GSM2230761_mouse1_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+mouse2 <- read.csv("GSE84133_RAW/GSM2230762_mouse2_umifm_counts.csv.gz",
+	stringsAsFactor=FALSE)
+
+dim(human1) # [1]  1937 20128
+dim(human2) # [1]  1724 20128
+dim(human3) # [1]  3605 20128
+dim(human4) # [1]  1303 20128
+dim(mouse1) # [1]   822 14881
+dim(mouse2) # [1]  1064 14881
+
+Pancreas.Human <- t(rbind(human1[, 4:ncol(human1)], human2[, 4:ncol(human2)], human3[, 4:ncol(human3)], human4[, 4:ncol(human4)]))
+Pancreas.Mouse <- t(rbind(mouse1[, 4:ncol(mouse1)], mouse2[, 4:ncol(mouse2)]))
+
+label.Pancreas.Human <- c(human1[,3], human2[,3], human3[,3], human4[,3])
+label.Pancreas.Mouse <- c(mouse1[,3], mouse2[,3])
+names(label.Pancreas.Human) <- label.Pancreas.Human
+names(label.Pancreas.Mouse) <- label.Pancreas.Mouse
+
+label.Pancreas.Human[grep("acinar", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[1]
+
+label.Pancreas.Human[grep("activated_stellate", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[2]
+label.Pancreas.Mouse[grep("activated_stellate", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[2]
+
+label.Pancreas.Human[grep("alpha", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[3]
+label.Pancreas.Mouse[grep("alpha", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[3]
+
+label.Pancreas.Human[grep("beta", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[4]
+label.Pancreas.Mouse[grep("beta", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[4]
+
+label.Pancreas.Mouse[grep("B_cell", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[5]
+
+label.Pancreas.Human[grep("delta", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[6]
+label.Pancreas.Mouse[grep("delta", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[6]
+
+label.Pancreas.Human[grep("ductal", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[7]
+label.Pancreas.Mouse[grep("ductal", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[7]
+
+label.Pancreas.Human[grep("endothelial", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[8]
+label.Pancreas.Mouse[grep("endothelial", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[8]
+
+label.Pancreas.Human[grep("epsilon", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[9]
+
+label.Pancreas.Human[grep("gamma", label.Pancreas.Human)] <-
+	brewer.pal(11, "Spectral")[10]
+label.Pancreas.Mouse[grep("gamma", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[10]
+
+label.Pancreas.Mouse[grep("immune_other", label.Pancreas.Mouse)] <-
+	brewer.pal(11, "Spectral")[11]
+
+label.Pancreas.Human[grep("macrophage", label.Pancreas.Human)] <-
+	brewer.pal(8, "Accent")[1]
+label.Pancreas.Mouse[grep("macrophage", label.Pancreas.Mouse)] <-
+	brewer.pal(8, "Accent")[1]
+
+label.Pancreas.Human[grep("mast", label.Pancreas.Human)] <-
+	brewer.pal(8, "Accent")[2]
+
+label.Pancreas.Human[grep("quiescent_stellate", label.Pancreas.Human)] <-
+	brewer.pal(8, "Accent")[3]
+label.Pancreas.Mouse[grep("quiescent_stellate", label.Pancreas.Mouse)] <-
+	brewer.pal(8, "Accent")[3]
+
+label.Pancreas.Human[grep("schwann", label.Pancreas.Human)] <-
+	brewer.pal(8, "Accent")[4]
+label.Pancreas.Mouse[grep("schwann", label.Pancreas.Mouse)] <-
+	brewer.pal(8, "Accent")[4]
+
+label.Pancreas.Human[grep("t_cell", label.Pancreas.Human)] <-
+	brewer.pal(8, "Accent")[5]
+label.Pancreas.Mouse[grep("T_cell", label.Pancreas.Mouse)] <-
+	brewer.pal(8, "Accent")[5]
+
+# Remove variance 0 genes
+Pancreas.Human <- Pancreas.Human[
+	which(rowVars(Pancreas.Human) != 0), ]
+Pancreas.Mouse <- Pancreas.Mouse[
+	which(rowVars(log10(as.matrix(Pancreas.Mouse) + 1)) != 0), ]
+
+# Remove low-exp genes
+Pancreas.Human_high <- Pancreas.Human[
+	which(rowMeans(log10(Pancreas.Human + 1)) > 0.1), ]
+Pancreas.Mouse_high <- Pancreas.Mouse[
+	which(rowMeans(log10(Pancreas.Mouse + 1)) > 0.1), ]
+
+# PCA
+result.pca.Pancreas.Human <- prcomp(log10(Pancreas.Human + 1))
+result.pca.Pancreas.Human_high <- prcomp(log10(Pancreas.Human_high + 1))
+result.pca.Pancreas.Mouse <- prcomp(log10(Pancreas.Mouse + 1))
+result.pca.Pancreas.Mouse_high <- prcomp(log10(Pancreas.Mouse_high + 1))
+
+# tSNE
+result.tSNE.Pancreas.Human <- Rtsne(
+	dist(result.pca.Pancreas.Human$rotation[,1:20]), perplexity=30)
+result.tSNE.Pancreas.Human_high <- Rtsne(
+	dist(result.pca.Pancreas.Human_high$rotation[,1:20]), perplexity=30)
+result.tSNE.Pancreas.Mouse <- Rtsne(
+	dist(result.pca.Pancreas.Mouse$rotation[,1:20]), perplexity=30)
+result.tSNE.Pancreas.Mouse_high <- Rtsne(
+	dist(result.pca.Pancreas.Mouse_high$rotation[,1:20]), perplexity=30)
+
+# save
+save.image("Pancreas.RData")
+
+# plot
+png(file="Pancreas.Human.png", width=750, height=750)
+plot(result.tSNE.Pancreas.Human$Y, col=label.Pancreas.Human, pch=16, xlab="Dim1", ylab="Dim2", cex=2)
+legend("topright", legend=names(table(names(label.Pancreas.Human))), col=table(label.Pancreas.Human), pch=16)
+dev.off()
+
+png(file="Pancreas.Human_high.png", width=750, height=750)
+plot(result.tSNE.Pancreas.Human_high$Y, col=label.Pancreas.Human, pch=16, xlab="Dim1", ylab="Dim2", cex=2)
+legend("topright", legend=names(table(names(label.Pancreas.Human))), col=table(label.Pancreas.Human), pch=16)
+dev.off()
+
+png(file="Pancreas.Mouse.png", width=750, height=750)
+plot(result.tSNE.Pancreas.Mouse$Y, col=label.Pancreas.Mouse, pch=16, xlab="Dim1", ylab="Dim2", cex=2)
+legend("bottomright", legend=names(table(names(label.Pancreas.Mouse))), col=table(label.Pancreas.Mouse), pch=16)
+dev.off()
+
+png(file="Pancreas.Mouse_high.png", width=750, height=750)
+plot(result.tSNE.Pancreas.Mouse_high$Y, col=label.Pancreas.Mouse, pch=16, xlab="Dim1", ylab="Dim2", cex=2)
+legend("topleft", legend=names(table(names(label.Pancreas.Mouse))), col=table(label.Pancreas.Mouse), pch=16)
+dev.off()
+
+# Output
+write.table(Pancreas.Human, "Data.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output
+write.table(t(Pancreas.Human), "t_Data.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log-transformation
+out <- log10(Pancreas.Human + 1)
+
+# data.frame => matrix
+out <- as.matrix(out)
+
+# Output
+write.table(out, "LogDataZero.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output
+write.table(t(out), "t_LogDataZero.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output
+write.table(out, "LogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output
+write.table(t(out), "t_LogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Centering
+out <- as.matrix(t(scale(t(out))))
+
+# Output
+write.table(out, "ScaledLogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Output
+write.table(t(out), "t_ScaledLogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")

@@ -18,11 +18,13 @@ install.packages("svd", repos="http://cran.r-project.org")
 install.packages("rsvd", repos="http://cran.r-project.org")
 install.packages("grid", repos="http://cran.r-project.org")
 install.packages("Rmisc", repos="http://cran.r-project.org")
+install.packages("Rtsne", repos="http://cran.r-project.org")
 
 # Bioconductor
 install.packages("BiocManager", repos="http://cran.r-project.org")
 library("BiocManager")
 BiocManager::install("pcaMethods", ask=FALSE)
+BiocManager::install("destiny", ask=FALSE)
 
 # GitHub
 install.packages("devtools", repos="http://cran.r-project.org")
