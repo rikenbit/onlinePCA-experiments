@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#$ -l nc=4
+#$ -p -50
+#$ -q node.q
+
+/usr/bin/time -v R --vanilla --slave --args XXXXX YYYYY/Eigen_vectors.csv YYYYY/Eigen_values.csv SSSSS < src/PROPACK.R >& ZZZZZ
+
+touch YYYYY/Eigen_vectors.csv
+touch YYYYY/Eigen_values.csv
+touch ZZZZZ

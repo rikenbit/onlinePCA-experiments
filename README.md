@@ -1,17 +1,17 @@
 # onlinePCA-experiments
 
-# Data preparation (for generating ./Data/*/Data.csv)
+## Data preparation (for generating ./Data/*/*.csv)
 - Cortex : ./Data/Cortex/README
 - Pancreas : ./Data/Pancreas/README
 - Brain : https://gist.github.com/kokitsuyuzaki/5b6cebcaf37100c8794bdb89c7135fd5
 
-# Requirement
+## Requirement
 - Open Grid Scheduler/Grid Engine : XXX
 - R : v3.5.0
 - Python : v3.6.4
 - Julia : v1.0.1
 
-# How to perform all the PCA scripts
+## How to perform all the PCA scripts
 ```{bash}
 cd Analysis
 rake install # Package installation
