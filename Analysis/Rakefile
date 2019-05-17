@@ -15,11 +15,9 @@ task :preprocess do
 	sh "src/MakeBin.sh"
 	# Summary
 	sh "src/Sumr.sh"
-	# Downsampling
+	# for Downsampling
 	sh "src/MakeRef.sh"
 	sh "src/RefSVD.sh"
-	# Transpose
-	sh "src/Transpose.sh"
 end
 
 desc "Benchmarking all the PCA implementations"

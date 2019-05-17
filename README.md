@@ -6,7 +6,7 @@
 - Brain : Data/Brain/README (for generating Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.csv)
 
 ## Requirement
-- Open Grid Scheduler/Grid Engine : XXX
+- Open Grid Scheduler/Grid Engine : 2011.11
 - R : v3.5.0
 - Python : v3.6.4
 - Julia : v1.0.1
@@ -21,6 +21,6 @@ rake tenxpca # PCA implementation for 10X-HDF files
 ```
 
 ## Result of the banchmarking
-- Eigenvectors : Data/{Cortex,Pancreas,Brain}/*/Eigen_vectors.csv
-- Eigenvalues : Data/{Cortex,Pancreas,Brain}/*/Eigen_values.csv
-- Elapsed time and memory usage : log/*
+- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/*/Eigen_vectors.csv
+- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/*/Eigen_values.csv
+- **Elapsed time and memory usage** : log/*
