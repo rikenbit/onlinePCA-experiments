@@ -9,7 +9,7 @@ task :install do
 	sh "pip install dask"
 	sh "pip install dask_ml"
 	# Julia
-	sh "julia src/Install_Julia_Packages.jl" # まだ未完成
+	sh "julia src/Install_Julia_Packages.jl"
 end
 
 desc "Preprocessing the data files"
