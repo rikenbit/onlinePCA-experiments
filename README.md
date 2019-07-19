@@ -2,8 +2,9 @@
 [![DOI](https://zenodo.org/badge/186921547.svg)](https://zenodo.org/badge/latestdoi/186921547)
 
 ## About data preparation
-- **Cortex** : Data/Cortex/README
+- **PBMCs** : Data/PBMCs/README
 - **Pancreas** : Data/Pancreas/README
+- **BrainSpinalCord** : Data/BrainSpinalCord/README
 - **Brain** : Data/Brain/README
 
 ## Requirements
@@ -24,6 +25,6 @@ rake tenxpca # A PCA implementation for 10X-HDF files
 ```
 
 ## Result of the banchmarking
-- **Eigenvectors** : Data/{Cortex,Pancreas,Brain}/*[Each PCA]*/Eigen_vectors.csv
-- **Eigenvalues** : Data/{Cortex,Pancreas,Brain}/*[Each PCA]*/Eigen_values.csv
+- **Eigenvectors** : Data/{PBMCs,Pancreas,BrainSpinalCord,Brain}/*[Each PCA]*/Eigen_vectors.csv
+- **Eigenvalues** : Data/{PBMCs,Pancreas,BrainSpinalCord,Brain}/*[Each PCA]*/Eigen_values.csv
 - **Elapsed time and memory usage** : Analysis/log/*
