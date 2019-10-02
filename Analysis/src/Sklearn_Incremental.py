@@ -8,8 +8,9 @@ import itertools
 
 # args[1] : Input file
 # args[2] : Dimention
-# args[3] : Output file (Eigen vectors)
-# args[4] : Output file (Eigen values)
+# args[3] : Chunk size
+# args[4] : Output file (Eigen vectors)
+# args[5] : Output file (Eigen values)
 args = sys.argv
 
 # Setting
@@ -18,21 +19,22 @@ i = 1
 start = 0
 end = int(args[2])
 eof = False
+chunksize = int(args[3])
 
 # Incremental PCA
 while eof == False:
 	with open(args[1]) as f_input:
+		start = i * chunksize
+		end = start + chunksize
 		# Import
 		data = np.loadtxt(itertools.islice(f_input, start, end), delimiter=",")
-		if data.shape[0] < int(args[2]):
+		if (data.shape[0] < chunksize) or (len(data.shape) == 1):
 			eof = True
 		else:
-			data = np.log10(data + 1)
+			data = preprocessing.scale(np.log10(data + 1), axis=1, with_mean=True, with_std=False)
 			pca.partial_fit(data)
-			start =  int(args[2]) * i
-			end = start + int(args[2])
 			i = i + 1
 
 # Save
-np.savetxt(args[3], pca.components_.T, delimiter=",")
-np.savetxt(args[4], pca.explained_variance_, delimiter=",")
+np.savetxt(args[4], pca.components_.T, delimiter=",")
+np.savetxt(args[5], pca.explained_variance_, delimiter=",")

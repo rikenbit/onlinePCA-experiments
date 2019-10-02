@@ -12,7 +12,7 @@ import dask.dataframe as dd
 args = sys.argv
 
 # Import as dask array
-data = dd.read_csv(args[1], sep=",", header=None)
+data = dd.read_csv(args[1], sep=",", header=None, dtype=float)
 data = data.to_dask_array(True)
 data = np.log10(data + 1)
 

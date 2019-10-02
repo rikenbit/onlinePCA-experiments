@@ -1,14 +1,19 @@
 #!/bin/bash
 
-echo "Cortex"
+echo "PBMCs"
 /usr/bin/time -v julia src/makeref.jl \
- ../Data/Cortex/Data.csv \
- ../Data/Cortex/refData.csv >& log/makeref_Cortex.out
+ ../Data/PBMCs/Data.csv \
+ ../Data/PBMCs/refData.csv >& log/makeref_PBMCs.out
 
 echo "Pancreas"
 /usr/bin/time -v julia src/makeref.jl \
  ../Data/Pancreas/Data.csv \
  ../Data/Pancreas/refData.csv >& log/makeref_Pancreas.out
+
+echo "BrainSpinalCord"
+/usr/bin/time -v julia src/makeref.jl \
+ ../Data/BrainSpinalCord/Data.csv \
+ ../Data/BrainSpinalCord/refData.csv >& log/makeref_BrainSpinalCord.out
 
 echo "Brain"
 /usr/bin/time -v julia src/makeref.jl \

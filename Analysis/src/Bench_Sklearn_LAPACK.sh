@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/Sklearn_LAPACK_Template > TMP_Sklearn_LAPACK_Cortex.sh
-mkdir -p ../Data/Cortex/Sklearn_LAPACK
-sed -e "s|YYYYY|../Data/Cortex/Sklearn_LAPACK|g" TMP_Sklearn_LAPACK_Cortex.sh > Sklearn_LAPACK_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_Sklearn_LAPACK.out|g" Sklearn_LAPACK_Cortex.sh > TMP_Sklearn_LAPACK_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_Sklearn_LAPACK_Cortex.sh > Sklearn_LAPACK_Cortex.sh
-qsub Sklearn_LAPACK_Cortex.sh
-rm Sklearn_LAPACK_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/Sklearn_LAPACK_Template > TMP_Sklearn_LAPACK_PBMCs.sh
+mkdir -p ../Data/PBMCs/Sklearn_LAPACK
+sed -e "s|YYYYY|../Data/PBMCs/Sklearn_LAPACK|g" TMP_Sklearn_LAPACK_PBMCs.sh > Sklearn_LAPACK_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_Sklearn_LAPACK.out|g" Sklearn_LAPACK_PBMCs.sh > TMP_Sklearn_LAPACK_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_Sklearn_LAPACK_PBMCs.sh > Sklearn_LAPACK_PBMCs.sh
+qsub Sklearn_LAPACK_PBMCs.sh
+rm Sklearn_LAPACK_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/Sklearn_LAPACK_Template > TMP_Sklearn_LAPACK_Pancreas.sh

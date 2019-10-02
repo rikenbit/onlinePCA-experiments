@@ -1,8 +1,10 @@
 desc "Package installation"
 task :install do
+	puts "install"
 	# R
 	sh "R CMD BATCH src/Install_R_Packages.R"
 	# Python
+	sh "pip install --upgrade pip"
 	sh "pip install scipy"
 	sh "pip install numpy"
 	sh "pip install scikit-learn"
@@ -14,6 +16,7 @@ end
 
 desc "Preprocessing the data files"
 task :preprocess do
+	puts "preprocess"
 	# CSV to Zstd
 	sh "src/MakeBin.sh"
 	# Summary
@@ -25,6 +28,7 @@ end
 
 desc "Benchmarking all the PCA implementations"
 task :benchmark do
+	puts "benchmark"
 	# SimT
 	sh "src/Bench_prcomp.sh"
 	sh "src/Bench_Sklearn_LAPACK.sh"
@@ -35,7 +39,6 @@ task :benchmark do
 	sh "src/Bench_Sklearn_Incremental.sh"
 	# Krylov
 	sh "src/Bench_IRLB.sh"
-	sh "src/Bench_rARPACK.sh"
 	sh "src/Bench_RSpectra.sh"
 	sh "src/Bench_PROPACK.sh"
 	sh "src/Bench_Sklearn_ARPACK.sh"
@@ -56,9 +59,6 @@ task :benchmark do
 	sh "src/Bench_Halko_2iter.sh"
 	sh "src/Bench_Halko_3iter.sh"
 	sh "src/Bench_Algorithm971_3iter.sh"
-end
-
-desc "PCA implementation for 10X-HDF files"
-task :tenxpca do
+	# PCA implementation for 10X-HDF files
 	sh "src/Bench_TENXPCA.sh"
 end

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/rsvd_Template > TMP_rsvd_Cortex.sh
-mkdir -p ../Data/Cortex/rsvd
-sed -e "s|YYYYY|../Data/Cortex/rsvd|g" TMP_rsvd_Cortex.sh > rsvd_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_rsvd.out|g" rsvd_Cortex.sh > TMP_rsvd_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_rsvd_Cortex.sh > rsvd_Cortex.sh
-qsub rsvd_Cortex.sh
-rm *rsvd_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/rsvd_Template > TMP_rsvd_PBMCs.sh
+mkdir -p ../Data/PBMCs/rsvd
+sed -e "s|YYYYY|../Data/PBMCs/rsvd|g" TMP_rsvd_PBMCs.sh > rsvd_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_rsvd.out|g" rsvd_PBMCs.sh > TMP_rsvd_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_rsvd_PBMCs.sh > rsvd_PBMCs.sh
+qsub rsvd_PBMCs.sh
+rm *rsvd_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/rsvd_Template > TMP_rsvd_Pancreas.sh

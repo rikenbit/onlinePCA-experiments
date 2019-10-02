@@ -3,15 +3,20 @@
 LATEST=(`ls -t ~/.julia/packages/OnlinePCA/ | head -1`)
 csv2bin="~/.julia/packages/OnlinePCA/"$LATEST"/bin/csv2bin"
 
-echo "Cortex"
+echo "PBMCs"
 /usr/bin/time -v julia $csv2bin \
---csvfile ../Data/Cortex/Data.csv \
---binfile ../Data/Cortex/Data.zst >& log/csv2bin_Cortex.out
+--csvfile ../Data/PBMCs/Data.csv \
+--binfile ../Data/PBMCs/Data.zst >& log/csv2bin_PBMCs.out
 
 echo "Pancreas"
 /usr/bin/time -v julia $csv2bin \
 --csvfile ../Data/Pancreas/Data.csv \
 --binfile ../Data/Pancreas/Data.zst >& log/csv2bin_Pancreas.out
+
+echo "BrainSpinalCord"
+/usr/bin/time -v julia $csv2bin \
+--csvfile ../Data/BrainSpinalCord/Data.csv \
+--binfile ../Data/BrainSpinalCord/Data.zst >& log/csv2bin_BrainSpinalCord.out
 
 echo "Brain"
 /usr/bin/time -v julia $csv2bin \

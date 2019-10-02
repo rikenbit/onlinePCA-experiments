@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/Sklearn_RandomizedPCA_Template > TMP_Sklearn_RandomizedPCA_Cortex.sh
-mkdir -p ../Data/Cortex/Sklearn_RandomizedPCA
-sed -e "s|YYYYY|../Data/Cortex/Sklearn_RandomizedPCA|g" TMP_Sklearn_RandomizedPCA_Cortex.sh > Sklearn_RandomizedPCA_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_Sklearn_RandomizedPCA.out|g" Sklearn_RandomizedPCA_Cortex.sh > TMP_Sklearn_RandomizedPCA_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_Sklearn_RandomizedPCA_Cortex.sh > Sklearn_RandomizedPCA_Cortex.sh
-qsub Sklearn_RandomizedPCA_Cortex.sh
-rm Sklearn_RandomizedPCA_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/Sklearn_RandomizedPCA_Template > TMP_Sklearn_RandomizedPCA_PBMCs.sh
+mkdir -p ../Data/PBMCs/Sklearn_RandomizedPCA
+sed -e "s|YYYYY|../Data/PBMCs/Sklearn_RandomizedPCA|g" TMP_Sklearn_RandomizedPCA_PBMCs.sh > Sklearn_RandomizedPCA_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_Sklearn_RandomizedPCA.out|g" Sklearn_RandomizedPCA_PBMCs.sh > TMP_Sklearn_RandomizedPCA_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_Sklearn_RandomizedPCA_PBMCs.sh > Sklearn_RandomizedPCA_PBMCs.sh
+qsub Sklearn_RandomizedPCA_PBMCs.sh
+rm Sklearn_RandomizedPCA_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/Sklearn_RandomizedPCA_Template > TMP_Sklearn_RandomizedPCA_Pancreas.sh

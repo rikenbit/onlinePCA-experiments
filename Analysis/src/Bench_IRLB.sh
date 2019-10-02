@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/IRLB_Template > TMP_IRLB_Cortex.sh
-mkdir -p ../Data/Cortex/IRLB
-sed -e "s|YYYYY|../Data/Cortex/IRLB|g" TMP_IRLB_Cortex.sh > IRLB_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_IRLB.out|g" IRLB_Cortex.sh > TMP_IRLB_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_IRLB_Cortex.sh > IRLB_Cortex.sh
-qsub IRLB_Cortex.sh
-rm *IRLB_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/IRLB_Template > TMP_IRLB_PBMCs.sh
+mkdir -p ../Data/PBMCs/IRLB
+sed -e "s|YYYYY|../Data/PBMCs/IRLB|g" TMP_IRLB_PBMCs.sh > IRLB_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_IRLB.out|g" IRLB_PBMCs.sh > TMP_IRLB_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_IRLB_PBMCs.sh > IRLB_PBMCs.sh
+qsub IRLB_PBMCs.sh
+rm *IRLB_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/IRLB_Template > TMP_IRLB_Pancreas.sh

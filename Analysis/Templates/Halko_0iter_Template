@@ -2,19 +2,22 @@
 
 #$ -l nc=6
 #$ -p -50
-#$ -q node.q
+#$ -q node07-10.q
 export OPENBLAS_NUM_THREADS=6
 
-LATEST=(`ls -t ~/.julia/packages/OnlinePCA/ | head -1`)
-halko="~/.julia/packages/OnlinePCA/"$LATEST"/bin/halko"
+julia="/home/koki/Software/julia-1.0.1/bin/julia"
+LATEST=(`ls -t /home/koki/.julia/packages/OnlinePCA/ | head -1`)
+halko="/home/koki/.julia/packages/OnlinePCA/"$LATEST"/bin/halko"
 
-/usr/bin/time -v julia $halko \
+/usr/bin/time -v $julia $halko \
 --scale log \
 --input AAAAA \
 --outdir BBBBB \
---rowmeanlist DDDDD \
+--rowmeanlist CCCCC \
+--colsumlist DDDDD \
 --dim EEEEE \
 --niter 0 \
+--cper FFFFF \
 --logdir BBBBB/log >& GGGGG
 
 touch BBBBB/Eigen_vectors.csv

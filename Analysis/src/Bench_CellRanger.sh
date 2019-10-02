@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/CellRanger_Template > TMP_CellRanger_Cortex.sh
-mkdir -p ../Data/Cortex/CellRanger
-sed -e "s|YYYYY|../Data/Cortex/CellRanger|g" TMP_CellRanger_Cortex.sh > CellRanger_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_CellRanger.out|g" CellRanger_Cortex.sh > TMP_CellRanger_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_CellRanger_Cortex.sh > CellRanger_Cortex.sh
-qsub CellRanger_Cortex.sh
-rm *CellRanger_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/CellRanger_Template > TMP_CellRanger_PBMCs.sh
+mkdir -p ../Data/PBMCs/CellRanger
+sed -e "s|YYYYY|../Data/PBMCs/CellRanger|g" TMP_CellRanger_PBMCs.sh > CellRanger_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_CellRanger.out|g" CellRanger_PBMCs.sh > TMP_CellRanger_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_CellRanger_PBMCs.sh > CellRanger_PBMCs.sh
+qsub CellRanger_PBMCs.sh
+rm *CellRanger_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/CellRanger_Template > TMP_CellRanger_Pancreas.sh

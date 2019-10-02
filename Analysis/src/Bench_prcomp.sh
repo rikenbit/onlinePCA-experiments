@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/prcomp_Template > TMP_prcomp_Cortex.sh
-mkdir -p ../Data/Cortex/prcomp
-sed -e "s|YYYYY|../Data/Cortex/prcomp|g" TMP_prcomp_Cortex.sh > prcomp_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_prcomp.out|g" prcomp_Cortex.sh > TMP_prcomp_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_prcomp_Cortex.sh > prcomp_Cortex.sh
-qsub prcomp_Cortex.sh
-rm *prcomp_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/prcomp_Template > TMP_prcomp_PBMCs.sh
+mkdir -p ../Data/PBMCs/prcomp
+sed -e "s|YYYYY|../Data/PBMCs/prcomp|g" TMP_prcomp_PBMCs.sh > prcomp_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_prcomp.out|g" prcomp_PBMCs.sh > TMP_prcomp_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_prcomp_PBMCs.sh > prcomp_PBMCs.sh
+qsub prcomp_PBMCs.sh
+rm *prcomp_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/prcomp_Template > TMP_prcomp_Pancreas.sh

@@ -1,0 +1,70 @@
+######################################################################
+# Step.1 : Download GSE110823_RAW.tar from GEO (GSE110823)
+# https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE110823&format=file
+######################################################################
+
+######################################################################
+# Step.2 : Perform the R script below
+######################################################################
+library("matrixStats")
+library("R.matlab")
+
+# Load data
+input <- readMat("GSM3017261_150000_CNS_nuclei.mat")
+bsc <- t(input$DGE)
+nr <- nrow(bsc)
+nc <- ncol(bsc)
+BrainSpinalCord_1 <- as.matrix(bsc[1:10000, 1:nc])
+BrainSpinalCord_2 <- as.matrix(bsc[10001:20000, 1:nc])
+BrainSpinalCord_3 <- as.matrix(bsc[20001:nr, 1:nc])
+BrainSpinalCord <- rbind(BrainSpinalCord_1, BrainSpinalCord_2, BrainSpinalCord_3)
+rm(BrainSpinalCord_1)
+rm(BrainSpinalCord_2)
+rm(BrainSpinalCord_3)
+gc();gc()
+
+# Remove variance 0 genes
+BrainSpinalCord <- BrainSpinalCord[which(rowVars(BrainSpinalCord) != 0), ]
+
+# save image
+save.image("BrainSpinalCord.RData")
+
+# Row Count: 25893 × 156049
+write.table(BrainSpinalCord, "Data.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(Count + 1): 25893 × 156049
+write.table(log10(BrainSpinalCord + 1), "LogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CPM: 25893 × 156049
+libsize <- colSums(BrainSpinalCord)
+CPM <- 1e6 * t(t(BrainSpinalCord) / libsize)
+write.table(CPM,
+	"CPM.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log(CPM + 1): 25893 × 156049
+write.table(log10(CPM + 1),
+	"LogCPM.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CP10K: 25893 × 156049
+CP10K <- 1e4 * t(t(BrainSpinalCord) / libsize)
+write.table(CP10K,
+	"CP10K.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log(CP10K + 1): 25893 × 156049
+write.table(log10(CP10K + 1),
+	"LogCP10K.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CPMED: 25893 × 156049
+CPMED <- median(libsize) * t(t(BrainSpinalCord) / libsize)
+write.table(CPMED,
+	"CPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log(CPMED+ 1) : 25893 × 156049
+LogCPMED <- log10(CPMED + 1)
+write.table(LogCPMED,
+	"LogCPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log(CPMED+ 1) : 156049 × 25893
+t_scaledLogCPMED <- scale(t(LogCPMED), scale=FALSE)
+write.table(t_scaledLogCPMED,
+  "t_scaledLogCPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")

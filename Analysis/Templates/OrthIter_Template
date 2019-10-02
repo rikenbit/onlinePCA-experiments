@@ -2,7 +2,7 @@
 
 #$ -l nc=6
 #$ -p -50
-#$ -q node07-10.q
+#$ -q large.q
 export OPENBLAS_NUM_THREADS=6
 
 julia="/home/koki/Software/julia-1.0.1/bin/julia"
@@ -15,9 +15,11 @@ orthiter="/home/koki/.julia/packages/OnlinePCA/"$LATEST"/bin/orthiter"
 --outdir BBBBB \
 --numepoch CCCCC \
 --rowmeanlist DDDDD \
---dim EEEEE \
---logdir BBBBB/log >& GGGGG
+--colsumlist EEEEE \
+--dim FFFFF \
+--cper GGGGG \
+--logdir BBBBB/log >& HHHHH
 
 touch BBBBB/Eigen_vectors.csv
 touch BBBBB/Eigen_values.csv
-touch GGGGG
+touch HHHHH

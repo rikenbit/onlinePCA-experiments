@@ -2,7 +2,7 @@ library("statmod")
 library("pcaMethods")
 library("fastICA")
 library("matrixStats")
-library("clValid") # connectivityの計算
+library("clValid") # connectivity
 library("mclust")
 library("ggplot2")
 library("reshape2")
@@ -21,6 +21,8 @@ library("grid")
 library("Rmisc")
 
 normalize <- function(out){
+    libsize <- colSums(out)
+    out <- median(libsize) * t(t(out) / libsize)
     out <- log10(out + 1)
     m <- rowMeans(out)
     sweep(out, 1, m)
@@ -40,15 +42,6 @@ profileIRLB <- function(input, output1, output2, dim=30){
     NC = ncol(out)
     out <- irlba(as.matrix(out), dim)
     write.table(t(out$v[,1:dim]), output1, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
-    write.table(out$d[1:dim]^2/NC, output2, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
-}
-
-profilerARPACK <- function(input, output1, output2, dim=30){
-    out <- read.csv(input, header=FALSE)
-    out <- normalize(out)
-    NC = ncol(out)
-    out <- rARPACK::svds(as.matrix(out), dim)
-    write.table(out$v[,1:dim], output1, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
     write.table(out$d[1:dim]^2/NC, output2, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
 }
 
@@ -86,9 +79,13 @@ profileoocRPCA <- function(input, m, n, output1, output2, dim=30){
     write.table(diag(out$S)[1:dim]^2/NC, output2, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
 }
 
-profileRefSVD <- function(input, output, dim=30){
+profileRefSVD <- function(input, output, m, dim=30){
+    m <- as.vector(unlist(m))
     out = read.csv(input, header=FALSE)
-    out = normalize(out)
+    libsize <- colSums(out)
+    out <- median(libsize) * t(t(out) / libsize)
+    out <- log10(out + 1)
+    out <- sweep(out, 1, m)
     res.svd = svd(out)
     write.table(res.svd$u[, 1:dim], output, quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
 }

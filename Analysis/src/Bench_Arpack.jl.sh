@@ -1,14 +1,14 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/Arpack.jl_Template > TMP_Arpack.jl_Cortex.sh
-mkdir -p ../Data/Cortex/Arpack.jl
-sed -e "s|YYYYY|../Data/Cortex/Arpack.jl|g" TMP_Arpack.jl_Cortex.sh > Arpack.jl_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_Arpack.jl.out|g" Arpack.jl_Cortex.sh > TMP_Arpack.jl_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_Arpack.jl_Cortex.sh > Arpack.jl_Cortex.sh
-chmod +x Arpack.jl_Cortex.sh
-qsub Arpack.jl_Cortex.sh
-rm *Arpack.jl_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/Arpack.jl_Template > TMP_Arpack.jl_PBMCs.sh
+mkdir -p ../Data/PBMCs/Arpack.jl
+sed -e "s|YYYYY|../Data/PBMCs/Arpack.jl|g" TMP_Arpack.jl_PBMCs.sh > Arpack.jl_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_Arpack.jl.out|g" Arpack.jl_PBMCs.sh > TMP_Arpack.jl_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_Arpack.jl_PBMCs.sh > Arpack.jl_PBMCs.sh
+chmod +x Arpack.jl_PBMCs.sh
+qsub Arpack.jl_PBMCs.sh
+rm *Arpack.jl_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/Arpack.jl_Template > TMP_Arpack.jl_Pancreas.sh

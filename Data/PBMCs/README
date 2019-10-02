@@ -1,0 +1,77 @@
+######################################################################
+# Step.1 : Download all the data stored in the website
+#  https://support.10xgenomics.com/single-cell-gene-expression/datasets/pbmc_1k_protein_v3
+# (Registration on 10X Genomics site is required)
+######################################################################
+
+######################################################################
+# Step.2 : Perform the R script below
+######################################################################
+library("matrixStats")
+library("RColorBrewer")
+library("Matrix")
+library("data.table")
+
+# Load data
+PBMCs <- as.matrix(readMM("filtered_feature_bc_matrix/matrix.mtx.gz"))
+rownames(PBMCs) <- unlist(fread("filtered_feature_bc_matrix/features.tsv.gz", header=FALSE)[,1])
+colnames(PBMCs) <- unlist(fread("filtered_feature_bc_matrix/barcodes.tsv.gz", header=FALSE))
+PBMCs <- PBMCs[grep("^ENSG*", rownames(PBMCs)), ]
+
+# Remove variance 0 genes
+PBMCs <- PBMCs[which(rowVars(PBMCs) != 0), ]
+# PCA
+result.pca.PBMCs <- prcomp(log10(PBMCs + 1))
+# K-means
+label.PBMCs <- kmeans(result.pca.PBMCs$rotation[, 1:5], 4)$cluster
+
+# Label
+names(label.PBMCs) <- label.PBMCs
+label.PBMCs[which(label.PBMCs == "1")] <- brewer.pal(9, "Set1")[1]
+label.PBMCs[which(label.PBMCs == "2")] <- brewer.pal(9, "Set1")[2]
+label.PBMCs[which(label.PBMCs == "3")] <- brewer.pal(9, "Set1")[3]
+label.PBMCs[which(label.PBMCs == "4")] <- brewer.pal(9, "Set1")[4]
+
+
+# save image
+save.image(file="PBMCs.Rdata")
+
+# Count: 17467 × 713
+write.table(PBMCs, "Data.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(Count + 1): 17467 × 713
+write.table(log10(PBMCs + 1), "LogData.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CPM: 17467 × 713
+libsize <- colSums(PBMCs)
+CPM <- 1e6 * t(t(PBMCs) / libsize)
+write.table(CPM,
+	"CPM.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(CPM + 1): 17467 × 713
+write.table(log10(CPM + 1),
+	"LogCPM.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CP10K: 17467 × 713
+CP10K <- 1e4 * t(t(PBMCs) / libsize)
+write.table(CP10K,
+	"CP10K.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(CP10K + 1): 17467 × 713
+write.table(log10(CP10K + 1),
+	"LogCP10K.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# CPMED: 17467 × 713
+CPMED <- median(libsize) * t(t(PBMCs) / libsize)
+write.table(CPMED,
+	"CPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(CPMED+ 1): 17467 × 713
+LogCPMED <- log10(CPMED + 1)
+write.table(LogCPMED,
+	"LogCPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")
+
+# Log10(CPMED+ 1)': 713 × 17467
+t_scaledLogCPMED <- scale(t(LogCPMED), scale=FALSE)
+write.table(t_scaledLogCPMED,
+	"t_scaledLogCPMED.csv", quote=FALSE, row.names=FALSE, col.names=FALSE, sep=",")

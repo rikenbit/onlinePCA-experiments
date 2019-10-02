@@ -1,14 +1,14 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/MultivariateStats_Template > TMP_MultivariateStats_Cortex.sh
-mkdir -p ../Data/Cortex/MultivariateStats
-sed -e "s|YYYYY|../Data/Cortex/MultivariateStats|g" TMP_MultivariateStats_Cortex.sh > MultivariateStats_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_MultivariateStats.out|g" MultivariateStats_Cortex.sh > TMP_MultivariateStats_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_MultivariateStats_Cortex.sh > MultivariateStats_Cortex.sh
-chmod +x MultivariateStats_Cortex.sh
-qsub MultivariateStats_Cortex.sh
-rm *MultivariateStats_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/MultivariateStats_Template > TMP_MultivariateStats_PBMCs.sh
+mkdir -p ../Data/PBMCs/MultivariateStats
+sed -e "s|YYYYY|../Data/PBMCs/MultivariateStats|g" TMP_MultivariateStats_PBMCs.sh > MultivariateStats_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_MultivariateStats.out|g" MultivariateStats_PBMCs.sh > TMP_MultivariateStats_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_MultivariateStats_PBMCs.sh > MultivariateStats_PBMCs.sh
+chmod +x MultivariateStats_PBMCs.sh
+qsub MultivariateStats_PBMCs.sh
+rm *MultivariateStats_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/MultivariateStats_Template > TMP_MultivariateStats_Pancreas.sh

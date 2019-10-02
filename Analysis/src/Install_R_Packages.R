@@ -1,5 +1,6 @@
 # CRAN
 install.packages("statmod", repos="http://cran.r-project.org")
+install.packages("R.matlab", repos="http://cran.r-project.org")
 install.packages("fastICA", repos="http://cran.r-project.org")
 install.packages("matrixStats", repos="http://cran.r-project.org")
 install.packages("clValid", repos="http://cran.r-project.org")
@@ -12,19 +13,18 @@ install.packages("fields", repos="http://cran.r-project.org")
 install.packages("irlba", repos="http://cran.r-project.org")
 install.packages("scales", repos="http://cran.r-project.org")
 install.packages("RMTstat", repos="http://cran.r-project.org")
-install.packages("rARPACK", repos="http://cran.r-project.org")
 install.packages("RSpectra", repos="http://cran.r-project.org")
 install.packages("svd", repos="http://cran.r-project.org")
 install.packages("rsvd", repos="http://cran.r-project.org")
 install.packages("grid", repos="http://cran.r-project.org")
 install.packages("Rmisc", repos="http://cran.r-project.org")
-install.packages("Rtsne", repos="http://cran.r-project.org")
+install.packages("Matrix", repos="http://cran.r-project.org")
+install.packages("data.table", repos="http://cran.r-project.org")
 
 # Bioconductor
 install.packages("BiocManager", repos="http://cran.r-project.org")
 library("BiocManager")
 BiocManager::install("pcaMethods", ask=FALSE)
-BiocManager::install("destiny", ask=FALSE)
 
 # GitHub
 install.packages("devtools", repos="http://cran.r-project.org")

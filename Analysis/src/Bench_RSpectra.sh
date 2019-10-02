@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/RSpectra_Template > TMP_RSpectra_Cortex.sh
-mkdir -p ../Data/Cortex/RSpectra
-sed -e "s|YYYYY|../Data/Cortex/RSpectra|g" TMP_RSpectra_Cortex.sh > RSpectra_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_RSpectra.out|g" RSpectra_Cortex.sh > TMP_RSpectra_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_RSpectra_Cortex.sh > RSpectra_Cortex.sh
-qsub RSpectra_Cortex.sh
-rm *RSpectra_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/RSpectra_Template > TMP_RSpectra_PBMCs.sh
+mkdir -p ../Data/PBMCs/RSpectra
+sed -e "s|YYYYY|../Data/PBMCs/RSpectra|g" TMP_RSpectra_PBMCs.sh > RSpectra_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_RSpectra.out|g" RSpectra_PBMCs.sh > TMP_RSpectra_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_RSpectra_PBMCs.sh > RSpectra_PBMCs.sh
+qsub RSpectra_PBMCs.sh
+rm *RSpectra_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/RSpectra_Template > TMP_RSpectra_Pancreas.sh

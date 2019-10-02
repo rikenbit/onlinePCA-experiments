@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Cortex"
-sed -e "s|XXXXX|../Data/Cortex/Data.csv|g" Templates/PROPACK_Template > TMP_PROPACK_Cortex.sh
-mkdir -p ../Data/Cortex/PROPACK
-sed -e "s|YYYYY|../Data/Cortex/PROPACK|g" TMP_PROPACK_Cortex.sh > PROPACK_Cortex.sh
-sed -e "s|ZZZZZ|log/Cortex_PROPACK.out|g" PROPACK_Cortex.sh > TMP_PROPACK_Cortex.sh
-sed -e "s|SSSSS|10|g" TMP_PROPACK_Cortex.sh > PROPACK_Cortex.sh
-qsub PROPACK_Cortex.sh
-rm *PROPACK_Cortex.sh
+echo "PBMCs"
+sed -e "s|XXXXX|../Data/PBMCs/Data.csv|g" Templates/PROPACK_Template > TMP_PROPACK_PBMCs.sh
+mkdir -p ../Data/PBMCs/PROPACK
+sed -e "s|YYYYY|../Data/PBMCs/PROPACK|g" TMP_PROPACK_PBMCs.sh > PROPACK_PBMCs.sh
+sed -e "s|ZZZZZ|log/PBMCs_PROPACK.out|g" PROPACK_PBMCs.sh > TMP_PROPACK_PBMCs.sh
+sed -e "s|SSSSS|3|g" TMP_PROPACK_PBMCs.sh > PROPACK_PBMCs.sh
+qsub PROPACK_PBMCs.sh
+rm *PROPACK_PBMCs.sh
 
 echo "Pancreas"
 sed -e "s|XXXXX|../Data/Pancreas/Data.csv|g" Templates/PROPACK_Template > TMP_PROPACK_Pancreas.sh

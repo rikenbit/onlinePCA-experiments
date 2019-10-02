@@ -1,4 +1,11 @@
+Data/*.csv
 Data/*/*.csv
+Data/*/*.RData
+Data/*/*.Rdata
+Data/*/*/*.csv
+Data/*/*/*/*.csv
+Data/*/*/*.gz
+Data/*/*.mat
 Data/*/*.zst
 Data/*/*/Eigen_vectors.csv
 Data/*/*/Eigen_values.csv

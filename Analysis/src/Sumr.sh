@@ -3,15 +3,20 @@
 LATEST=(`ls -t /home/koki/.julia/packages/OnlinePCA/ | head -1`)
 sumr="/home/koki/.julia/packages/OnlinePCA/"$LATEST"/bin/sumr"
 
-echo "Cortex"
+echo "PBMCs"
 /usr/bin/time -v julia $sumr \
---binfile ../Data/Cortex/Data.zst \
---outdir ../Data/Cortex >& log/sumr_Cortex.out
+--binfile ../Data/PBMCs/Data.zst \
+--outdir ../Data/PBMCs >& log/sumr_PBMCs.out
 
 echo "Pancreas"
 /usr/bin/time -v julia $sumr \
 --binfile ../Data/Pancreas/Data.zst \
 --outdir ../Data/Pancreas >& log/sumr_Pancreas.out
+
+echo "BrainSpinalCord"
+/usr/bin/time -v julia $sumr \
+--binfile ../Data/BrainSpinalCord/Data.zst \
+--outdir ../Data/BrainSpinalCord >& log/sumr_BrainSpinalCord.out
 
 echo "Brain"
 /usr/bin/time -v julia $sumr \

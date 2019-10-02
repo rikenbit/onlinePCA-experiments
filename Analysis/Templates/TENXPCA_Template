@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#$ -l nc=6
-#$ -p -50
+#$ -l nc=24
+#$ -p -30
 #$ -q large.q
-export OPENBLAS_NUM_THREADS=6
+export OPENBLAS_NUM_THREADS=24
 
 # AAAAA : Number of genes
 # BBBBB : Output directory

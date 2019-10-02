@@ -21,7 +21,6 @@ cd Analysis
 rake install # Package installation
 rake preprocess # Preprocessing the data files
 rake benchmark # Benchmarking all the PCA implementations
-rake tenxpca # A PCA implementation for 10X-HDF files
 ```
 
 ## Result of the banchmarking

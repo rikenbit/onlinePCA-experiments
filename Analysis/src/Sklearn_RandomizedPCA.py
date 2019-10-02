@@ -12,6 +12,9 @@ args = sys.argv
 
 # Import
 data = np.loadtxt(args[1], delimiter=",")
+libsize = np.sum(data, axis=0)
+med = np.median(np.asarray(libsize))
+data = med * (data / libsize)
 data = np.log10(data + 1)
 
 # PCA

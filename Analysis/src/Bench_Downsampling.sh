@@ -1,28 +1,33 @@
-julia="/home/koki/Software/julia-d386e40c17/bin/julia"
+#!/bin/bash
 
-echo "Cortex"
-mkdir -p ../Data/Cortex/Downsampling
-/usr/bin/time -v $julia src/deconv.jl \
- ../Data/Cortex/refLoading.csv \
- ../Data/Cortex/t_ScaledLogData.csv \
- ../Data/Cortex/Data.zst \
- ../Data/Cortex/Downsampling/Eigen_vectors.csv \
- ../Data/Cortex/Downsampling/Eigen_values.csv >& log/downsampling_Cortex.out
+echo "PBMCs"
+/usr/bin/time -v julia src/deconv.jl \
+ ../Data/PBMCs/refLoading.csv \
+ ../Data/PBMCs/t_scaledLogCPMED.csv \
+ ../Data/PBMCs/Data.zst \
+ ../Data/PBMCs/Downsampling/Eigen_vectors.csv \
+ ../Data/PBMCs/Downsampling/Eigen_values.csv >& log/deconv_PBMCs.out
 
 echo "Pancreas"
-mkdir -p ../Data/Pancreas/Downsampling
-/usr/bin/time -v $julia src/deconv.jl \
+/usr/bin/time -v julia src/deconv.jl \
  ../Data/Pancreas/refLoading.csv \
- ../Data/Pancreas/t_ScaledLogData.csv \
+ ../Data/Pancreas/t_scaledLogCPMED.csv \
  ../Data/Pancreas/Data.zst \
  ../Data/Pancreas/Downsampling/Eigen_vectors.csv \
- ../Data/Pancreas/Downsampling/Eigen_values.csv >& log/downsampling_Pancreas.out
+ ../Data/Pancreas/Downsampling/Eigen_values.csv >& log/deconv_Pancreas.out
+
+echo "BrainSpinalCord"
+/usr/bin/time -v julia src/deconv.jl \
+ ../Data/BrainSpinalCord/refLoading.csv \
+ ../Data/BrainSpinalCord/t_scaledLogCPMED.csv \
+ ../Data/BrainSpinalCord/Data.zst \
+ ../Data/BrainSpinalCord/Downsampling/Eigen_vectors.csv \
+ ../Data/BrainSpinalCord/Downsampling/Eigen_values.csv >& log/deconv_BrainSpinalCord.out
 
 echo "Brain"
-mkdir -p ../Data/Brain/Downsampling
-/usr/bin/time -v $julia src/deconv.jl \
+/usr/bin/time -v julia src/deconv.jl \
  ../Data/Brain/refLoading.csv \
- ../Data/Brain/t_scale_log_1M_neurons_filtered_gene_bc_matrices_h5.csv \
+ ../Data/Brain/t_scale_log_cpmed_1M_neurons_filtered_gene_bc_matrices_h5.csv \
  ../Data/Brain/1M_neurons_filtered_gene_bc_matrices_h5.zst \
  ../Data/Brain/Downsampling/Eigen_vectors.csv \
- ../Data/Brain/Downsampling/Eigen_values.csv >& log/downsampling_Brain.out
+ ../Data/Brain/Downsampling/Eigen_values.csv >& log/deconv_Brain.out
